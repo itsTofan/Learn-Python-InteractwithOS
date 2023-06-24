@@ -32,3 +32,27 @@ import requests
 #run with ./hello_world.py
 
 
+#---------------------------------------------------------
+#---------------------------------------------------------
+#python module - code reuse 
+import areas
+print(areas.triangle(3, 5))
+print(areas.circle(4))
+
+#benefit of automation -centralizing mistake
+#pitfall of automation - trade off - is the time and effort of write script is worth potential automation benefits?
+#time to automate < (time to perform * amount time done)
+#pareto principle - 20% if the system administration task that you perform are responsible for 80% of your work.
+#bit-rot is the process of software falling out of step with the environment
+#automation example - check healths of computer
+import shutil #disk usage
+import psutil #cpu usage
+
+#get disk usage
+du = shutil.disk_usage("/")
+print(du)
+#free disk usage
+print(du.free/du.total*100)
+
+print(psutil.cpu_percent(0.1))
+print(psutil.cpu_percent(0.5))
