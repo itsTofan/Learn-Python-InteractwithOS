@@ -47,12 +47,22 @@ print(areas.circle(4))
 #automation example - check healths of computer
 import shutil #disk usage
 import psutil #cpu usage
+#shebang - command to use to execute script
+#nano editior in linux
+#!/user/bin/env python3
 
 #get disk usage
-du = shutil.disk_usage("/")
-print(du)
-#free disk usage
-print(du.free/du.total*100)
+def check_disk_usage(disk):
+    du = shutil.disk_usage(disk)
+    free = du.free / du.total * 100
+    return free > 20
 
-print(psutil.cpu_percent(0.1))
-print(psutil.cpu_percent(0.5))
+#check cpu usage
+def check_cpu_usage():
+    usage = psutil.cpu_percent(1)
+    return usage < 75
+
+if not check_disk_usage("/") or not check_cpu_usage():
+    print("ERROR")
+else:
+    print("Everything is OK!")
