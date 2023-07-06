@@ -44,3 +44,25 @@ print("FRUIT: " + os.environ.get("FRUIT", ""))
 #Command line Argument and exit status is a parameters that are passed to a program when it's started
 import sys
 print(sys.argv)
+
+#exit status or exit code - value returnn by a program to the shell
+#0 is success else is error
+
+
+#------------------------------
+#Python sub processing - running system commands
+import subprocess
+#subprocess.run(["date"], shell=True)
+#subprocess.run(["sleep", "2"], shell=True)
+result = subprocess.run(["ls","this_file_does_not_exist"], shell=True)
+print(result.returncode)
+
+#obtain the output of system command
+result = subprocess.run(["host","8.8.8.8"], capture_output=True, shell=True)
+print(result.returncode)
+print(result.stdout.decode().split)
+
+#advance subprocess management - 
+my_env = os.environ.copy()
+my_env["PATH"] = os.pathsep.join(["/opt/myapp"], my_env["PATH"])
+result = subprocess.run(["myapp"], env=my_env, shell=True)
