@@ -66,3 +66,25 @@ print(result.stdout.decode().split)
 my_env = os.environ.copy()
 my_env["PATH"] = os.pathsep.join(["/opt/myapp"], my_env["PATH"])
 result = subprocess.run(["myapp"], env=my_env, shell=True)
+
+#Processing log file
+#log file using regular expression
+#read file line by line if the file is big
+
+import sys
+import re
+
+logfile = "syslog.txt"
+usernames = {}
+with open(logfile) as f:
+    for line in f:
+        if "CRON" not in line:
+            continue
+        pattern = r"USER \((\w+)\)$"
+        result = re.search(pattern, line)
+        if result is None:
+            continue
+        name = result[1]
+        usernames[name] =  usernames.get(name, 0) + 1
+
+print(usernames)
