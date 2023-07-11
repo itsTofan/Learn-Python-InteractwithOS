@@ -78,3 +78,125 @@ def validate_user(username, minlen):
     return True
 
 #Testing for expected error
+
+
+#practice lab
+my_list = [27, 5, 9, 6, 8]
+
+def RemoveValue(myVal):
+    if myVal not in my_list:
+        raise ValueError("Value must be in the given list")
+    else:
+        my_list.remove(myVal)
+    return my_list
+
+print(RemoveValue(27))
+
+my_word_list = ['east', 'after', 'up', 'over', 'inside']
+
+def OrganizeList(myList):
+    for item in myList:
+        assert type(myList) ==  str, " list must be a list of strings"
+    myList.sort()
+    return myList
+
+print(OrganizeList(my_new_list))
+
+my_new_list = [6, 3, 8, "12", 42]
+print(OrganizeList(my_new_list))
+
+import random
+
+participants = ['Jack','Jill','Larry','Tom']
+
+def Guess(participants):
+    my_participant_dict = {}
+    for participant in participants:
+        my_participant_dict[participant] = random.randint(1, 9)
+    if my_participant_dict['Larry'] == 9:
+        return True
+    else:
+        return False
+    
+print(Guess(participants))
+
+# Revised Guess() function
+def Guess(participants):
+    my_participant_dict = {}
+    for participant in participants:
+        my_participant_dict[participant] = random.randint(1, 9)
+    if my_participant_dict['Larry'] == 9:
+        return True
+    else:
+        return False
+
+participants = ['Cathy','Fred','Jack','Tom']
+print(Guess(participants))
+
+
+""""
+Test
+cd ~/data
+ls
+cat user_emails.csv
+cd ~/scripts
+ls
+cat emails.py
+python3 emails.py Blossom Gill
+nano ~/scripts/emails_test.py
+#!/usr/bin/env python3
+import unittest
+
+from emails import find_email
+class EmailsTest(unittest.TestCase):
+  def test_basic(self):
+    testcase = [None, "Bree", "Campbell"]
+    expected = "breee@abc.edu"
+    self.assertEqual(find_email(testcase), expected)
+if __name__ == '__main__':
+  unittest.main()
+
+chmod +x emails_test.py
+./emails_test.py
+
+python3 emails.py Kirk
+
+nano emails_test.py
+  def test_one_name(self):
+    testcase = [None, "John"]
+    expected = "Missing parameters"
+    self.assertEqual(find_email(testcase), expected)
+
+./emails_test.py
+nano emails.py
+#!/usr/bin/env python3
+import sys
+import csv
+def populate_dictionary(filename):
+  Populate a dictionary with name/email pairs for easy lookup.
+  email_dict = {}
+  with open(filename) as csvfile:
+    lines = csv.reader(csvfile, delimiter = ',')
+    for row in lines:
+      name = str(row[0].lower())
+      email_dict[name] = row[1]
+  return email_dict
+def find_email(argv):
+  Return an email address based on the username given.
+  # Create the username based on the command line input.
+  try:
+    fullname = str(argv[1] + " " + argv[2])
+    # Preprocess the data
+    email_dict = populate_dictionary('/home/{{ username }}/data/user_emails.csv')
+    # Find and print the email
+    return email_dict.get(fullname.lower())
+  except IndexError:
+    return "Missing parameters"
+def main():
+  print(find_email(sys.argv))
+if __name__ == "__main__":
+  main()
+
+./emails_test.py
+
+"""
