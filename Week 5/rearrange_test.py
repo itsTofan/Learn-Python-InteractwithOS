@@ -1,4 +1,4 @@
-from week_5 import rearrenge_name
+from week_5 import rearrenge_name, validate_user
 import unittest
 
 class TestRearrange (unittest.TestCase):
@@ -22,4 +22,18 @@ class TestRearrange (unittest.TestCase):
         expected = "Voltaire"
         self.assertEqual(rearrenge_name(testcase), expected)
 
+class TestValidateUser (unittest.TestCase):
+    def test_valid(self):
+        self.assertEqual(validate_user("validuser", 3), True)
+
+    def test_too_short(self):
+        self.assertEqual(validate_user("inv", 5), False)
+
+    def test_invalid_characters(self):
+        self.assertEqual(validate_user("invaliduser", 1), False)
+
+    def test_invalid_minlen(self):
+        self.asserrtRaises(ValueError, validate_user, "user", -1)
+    
+    
 unittest.main()
