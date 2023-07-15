@@ -100,7 +100,53 @@ for file in *.HTM; do
     mv "$file" "$name.html"
 done
 
+--FINAL LAB
+cd data
+cat list.txt
+ls
+grep 'jane' ../data/list.txt
+grep ' jane ' ../data/list.txt
+grep " jane " ../data/list.txt | cut -d ' ' -f 1
+grep " jane " ../data/list.txt | cut -d ' ' -f 2
+grep " jane " ../data/list.txt | cut -d ' ' -f 3
+grep " jane " ../data/list.txt | cut -d ' ' -f 1-3
+grep " jane " ../data/list.txt | cut -d ' ' -f 1,3
+test EXPRESSION
+if test -e ~/data/jane_profile_07272018.doc; then echo "File exists"; else echo "File doesn't exist"; fi
+> test.txt
+echo "I am appending text to this test file" >> test.txt
+cat test.txt
+for i in 1 2 3; do echo $i; done
 
+cd ~/scripts
+nano findJane.sh
+#!/bin/bash
+> oldFiles.txt
+chmod +x findJane.sh
+./findJane.sh
+#!/bin/bash
+
+files= grep ' jane ' ../data/list.txt | cut -d ' ' -f 3
+
+for file in files; do
+
+   if  test -e ~/data/$file; then
+     echo  $file >> oldFiles.txt;
+   else
+     echo "File dosen't exsist"; fi
+done
+
+nano changeJane.py
+#!/usr/bin/env python3
+import sys
+import subprocess
+f= open (sys.argv[1],"r")
+path='/home/<username>'
+for line in f.readlines():
+ old_name = line.strip()
+ new_name = old_name.replace("jane","jdoe")
+ subprocess.run(["mv",path+old_name,path+new_name])
+f.close()
 
 
 """
